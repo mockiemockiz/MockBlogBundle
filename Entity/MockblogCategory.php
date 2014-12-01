@@ -2,6 +2,7 @@
 
 namespace MockBlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,7 +28,7 @@ class MockblogCategory
     /**
      * @var integer
      */
-    private $parent;
+    private $parentId;
 
     /**
      * @var string
@@ -48,6 +49,14 @@ class MockblogCategory
      * @var \MockBlogBundle\Entity\MockblogCategory
      */
     private $id;
+
+    private $children;
+
+    private $parent;
+
+    public function __construct() {
+        $this->children = new ArrayCollection();
+    }
 
 
     /**
@@ -119,15 +128,27 @@ class MockblogCategory
         return $this->description;
     }
 
+    public function setParent(MockblogCategory $parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
     /**
      * Set parent
      *
-     * @param integer $parent
+     * @param $parentId
      * @return MockblogCategory
      */
-    public function setParent($parent)
+    public function setParentId($parentId)
     {
-        $this->parent = $parent;
+        $this->parentId = $parentId;
 
         return $this;
     }
@@ -135,11 +156,11 @@ class MockblogCategory
     /**
      * Get parent
      *
-     * @return integer 
+     * @return integer
      */
-    public function getParent()
+    public function getParentId()
     {
-        return $this->parent;
+        return $this->parentId;
     }
 
     /**

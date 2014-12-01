@@ -1,3 +1,7 @@
+mock_blog_mockblogcategory:
+    resource: "@MockBlogBundle/Resources/config/routing/mockblogcategory.yml"
+    prefix:   /category
+
 mock_blog_homepage:
     path:     /hello/{name}
     defaults: { _controller: MockBlogBundle:Default:index }

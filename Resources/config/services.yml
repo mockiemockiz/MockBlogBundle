@@ -2,3 +2,10 @@ services:
 #    mock_blog.example:
 #        class: MockBlogBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+      model_factory:
+        class: MockBlogBundle\Service\Model\ModelFactory
+      category_factory:
+        class: MockBlogBundle\Service\Model\ModelCategory
+        factory: ["@model_factory", createModelCategory]
+        arguments:
+          - entity_manager: @doctrine.orm.entity_manager

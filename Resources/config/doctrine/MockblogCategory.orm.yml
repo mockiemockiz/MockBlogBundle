@@ -10,8 +10,12 @@ MockBlogBundle\Entity\MockblogCategory:
                 - name
         parent:
             columns:
-                - parent
-    id: {  }
+                - parent_id
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
     fields:
         created:
             type: datetime
@@ -29,12 +33,13 @@ MockBlogBundle\Entity\MockblogCategory:
             length: null
             fixed: false
             comment: ''
-        parent:
-            type: integer
-            nullable: true
-            unsigned: false
-            comment: ''
-            default: '0'
+#        parentId:
+#            type: integer
+#            nullable: true
+#            unsigned: false
+#            comment: ''
+#            default: '0'
+#            column: parent_id
         slug:
             type: string
             nullable: false
@@ -53,14 +58,14 @@ MockBlogBundle\Entity\MockblogCategory:
             unsigned: false
             comment: ''
             column: total_post
-    oneToOne:
-        id:
+    oneToMany:
+        children:
+            targetEntity: MockblogCategory
+            mappedBy: parent
+    manyToOne:
+        parent:
+            name: parent_id
             targetEntity: MockblogCategory
             cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                id:
-                    referencedColumnName: parent
-            orphanRemoval: false
+            inversedBy: children
     lifecycleCallbacks: {  }

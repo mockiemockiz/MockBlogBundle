@@ -1,0 +1,30 @@
+mockblogcategory:
+    path:     /
+    defaults: { _controller: "MockBlogBundle:MockblogCategory:index" }
+
+mockblogcategory_show:
+    path:     /{id}/show
+    defaults: { _controller: "MockBlogBundle:MockblogCategory:show" }
+
+mockblogcategory_new:
+    path:     /new
+    defaults: { _controller: "MockBlogBundle:MockblogCategory:new" }
+
+mockblogcategory_create:
+    path:     /create
+    defaults: { _controller: "MockBlogBundle:MockblogCategory:create" }
+    requirements: { _method: post }
+
+mockblogcategory_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MockBlogBundle:MockblogCategory:edit" }
+
+mockblogcategory_update:
+    path:     /{id}/update
+    defaults: { _controller: "MockBlogBundle:MockblogCategory:update" }
+    requirements: { _method: post|put }
+
+mockblogcategory_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MockBlogBundle:MockblogCategory:delete" }
+    requirements: { _method: post|delete }
