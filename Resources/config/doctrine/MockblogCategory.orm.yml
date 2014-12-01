@@ -1,0 +1,66 @@
+MockBlogBundle\Entity\MockblogCategory:
+    type: entity
+    table: mockblog_category
+    indexes:
+        slug:
+            columns:
+                - slug
+        name:
+            columns:
+                - name
+        parent:
+            columns:
+                - parent
+    id: {  }
+    fields:
+        created:
+            type: datetime
+            nullable: false
+            comment: ''
+        name:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        description:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        parent:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+            default: '0'
+        slug:
+            type: string
+            nullable: false
+            length: 150
+            fixed: false
+            comment: ''
+        picture:
+            type: string
+            nullable: true
+            length: 150
+            fixed: false
+            comment: ''
+        totalPost:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+            column: total_post
+    oneToOne:
+        id:
+            targetEntity: MockblogCategory
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id:
+                    referencedColumnName: parent
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
