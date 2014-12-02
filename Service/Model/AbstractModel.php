@@ -56,9 +56,9 @@ abstract class AbstractModel {
         $this->em->flush();
     }
 
-    public function delete($entity)
+    public function delete()
     {
-        $this->em->remove($entity);
+        $this->em->remove($this->getEntity());
         $this->em->flush();
     }
 
