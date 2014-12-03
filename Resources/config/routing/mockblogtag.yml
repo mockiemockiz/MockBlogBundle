@@ -1,0 +1,30 @@
+tag:
+    path:     /
+    defaults: { _controller: "MockBlogBundle:MockblogTag:index" }
+
+tag_show:
+    path:     /{id}/show
+    defaults: { _controller: "MockBlogBundle:MockblogTag:show" }
+
+tag_new:
+    path:     /new
+    defaults: { _controller: "MockBlogBundle:MockblogTag:new" }
+
+tag_create:
+    path:     /create
+    defaults: { _controller: "MockBlogBundle:MockblogTag:create" }
+    requirements: { _method: post }
+
+tag_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MockBlogBundle:MockblogTag:edit" }
+
+tag_update:
+    path:     /{id}/update
+    defaults: { _controller: "MockBlogBundle:MockblogTag:update" }
+    requirements: { _method: post|put }
+
+tag_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MockBlogBundle:MockblogTag:delete" }
+    requirements: { _method: post|delete }

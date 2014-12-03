@@ -1,3 +1,7 @@
+mock_blog_tag:
+    resource: "@MockBlogBundle/Resources/config/routing/mockblogtag.yml"
+    prefix:   /tag
+
 mock_blog_mockblogcategory:
     resource: "@MockBlogBundle/Resources/config/routing/mockblogcategory.yml"
     prefix:   /category

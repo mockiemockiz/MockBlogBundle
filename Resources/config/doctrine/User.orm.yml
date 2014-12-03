@@ -1,0 +1,19 @@
+MockBlogBundle\Entity\User:
+    type: entity
+    table: homlist_user
+    indexes:
+        id:
+            columns:
+                - id
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        username:
+            type: string
+            nullable: false
+            comment: ''
+            column: username
+    lifecycleCallbacks: {  }

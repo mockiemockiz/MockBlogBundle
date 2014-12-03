@@ -17,6 +17,24 @@ services:
           - request: @request_stack
           - params: "%category%"
 
+      tag_factory:
+        class: MockBlogBundle\Service\Model\ModelTag
+        scope: request
+        factory: ["@model_factory", createModelTag]
+        arguments:
+          - entity_manager: @doctrine.orm.entity_manager
+          - request: @request_stack
+          - params: "%tag%"
+          - user_entity: @user_factory
+
+      user_factory:
+        class: MockBlogBundle\Service\Model\ModelUser
+        scope: request
+        factory: ["@model_factory", createModelUser]
+        arguments:
+          - entity_manager: @doctrine.orm.entity_manager
+          - request: @request_stack
+          - params: "%user%"
 
 # ========= form ==================
 
