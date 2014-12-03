@@ -8,38 +8,95 @@
 
 namespace MockBlogBundle\Service\Model;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-abstract class AbstractModel {
+abstract class AbstractModel implements AbstractModelInterface {
 
-    protected $em;
+    /**
+     * @var EntityManager
+     */
+    protected  $em;
 
+    /**
+     * @var EntityRepository
+     */
     protected  $repository;
 
+    /**
+     * Entity object
+     *
+     * @var object
+     */
     protected  $entity;
 
-    abstract public function __construct($em);
+    /**
+     * @var RequestStack
+     */
+    protected  $request;
+
+    /**
+     * @var array
+     */
+    protected  $params;
+
+    abstract public function __construct($em, $request, $params);
 
     abstract public function setEntity($id='');
 
-
+    /**
+     * @return EntityRepository
+     */
     public function getRepository()
     {
         return $this->repository;
     }
 
+    /**
+     * @return object
+     */
     public function getEntity()
     {
         return $this->entity;
     }
 
-    public function find($id)
+    /**
+     * @param string $key
+     * @return RequestStack | string
+     */
+    public function getRequest($key='')
     {
-        return $this->getRepository()->find($id);
+        if (!$key) {
+            return $this->request;
+        }
+        return $this->request->get($key);
     }
 
-    public function create($form, $request)
+    /**
+     * @param $id
+     * @return null|object
+     * @throws NotFoundHttpException
+     */
+    public function find($id)
     {
-        $form->handleRequest($request);
+        $entity = $this->getRepository()->find($id);
+
+        if (!$entity) {
+            throw new NotFoundHttpException('Unable to find entity.');
+        }
+
+        return $entity;
+    }
+
+    /**
+     * @param $form
+     * @return bool
+     */
+    public function create($form)
+    {
+        $form->handleRequest($this->getRequest());
 
         if ($form->isValid()) {
             $this->em->persist($this->getEntity());
@@ -51,15 +108,34 @@ abstract class AbstractModel {
         return false;
     }
 
-    public function save()
+    /**
+     * @param $form
+     * @return bool
+     */
+    public function save($form)
     {
-        $this->em->flush();
+        $form->handleRequest($this->getRequest());
+
+        if ($form->isValid()) {
+
+            $this->em->flush();
+            return true;
+
+        }
+
+        return false;
     }
 
-    public function delete()
+    /**
+     * @param $form
+     */
+    public function delete($form)
     {
-        $this->em->remove($this->getEntity());
-        $this->em->flush();
-    }
+        $form->handleRequest($this->getRequest());
 
-} 
+        if ($form->isValid()) {
+            $this->em->remove($this->getEntity());
+            $this->em->flush();
+        }
+    }
+}

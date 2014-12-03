@@ -11,9 +11,8 @@ namespace MockBlogBundle\Service\Model;
 
 class ModelFactory {
 
-    public function createModelCategory($em)
+    public function createModelCategory($em, $request, $params)
     {
-       return new ModelCategory($em);
+       return new ModelCategory($em, $request, $params);
     }
-
 } 

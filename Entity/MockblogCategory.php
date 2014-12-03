@@ -254,4 +254,37 @@ class MockblogCategory
     {
         return $this->id;
     }
+
+    /**
+     * Add children
+     *
+     * @param \MockBlogBundle\Entity\MockblogCategory $children
+     * @return MockblogCategory
+     */
+    public function addChild(\MockBlogBundle\Entity\MockblogCategory $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \MockBlogBundle\Entity\MockblogCategory $children
+     */
+    public function removeChild(\MockBlogBundle\Entity\MockblogCategory $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
 }
