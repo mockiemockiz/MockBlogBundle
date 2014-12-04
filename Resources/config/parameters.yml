@@ -1,0 +1,10 @@
+parameters:
+  category:
+    form_alias: mockblogcategory
+    entity_alias: MockBlogBundle:MockblogCategory
+  tag:
+    form_alias: mockblogbundle_mockblogtag
+    entity_alias: MockBlogBundle:MockblogTag
+  user:
+    form_alias: mockblogbundle_mockblogtag
+    entity_alias: MockBlogBundle:User

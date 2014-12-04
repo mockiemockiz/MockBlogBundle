@@ -1,0 +1,44 @@
+MockBlogBundle\Entity\MockblogTagPost:
+    type: entity
+    table: mockblog_tag_post
+    indexes:
+        fk_mockblog_tag_post_post_idx:
+            columns:
+                - post_id
+        IDX_4015C5DCBAD26311:
+            columns:
+                - tag_id
+    uniqueConstraints:
+        tag_post:
+            columns:
+                - tag_id
+                - post_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        post:
+            targetEntity: MockblogPost
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                post_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tag:
+            targetEntity: MockblogTag
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tag_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -2,3 +2,58 @@ services:
 #    mock_blog.example:
 #        class: MockBlogBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+# ======== factory ================
+
+      model_factory:
+        class: MockBlogBundle\Service\Model\ModelFactory
+
+      category_factory:
+        class: MockBlogBundle\Service\Model\ModelCategory
+        scope: request
+        factory: ["@model_factory", createModelCategory]
+        arguments:
+          - entity_manager: @doctrine.orm.entity_manager
+          - request: @request_stack
+          - params: "%category%"
+
+      tag_factory:
+        class: MockBlogBundle\Service\Model\ModelTag
+        scope: request
+        factory: ["@model_factory", createModelTag]
+        arguments:
+          - entity_manager: @doctrine.orm.entity_manager
+          - request: @request_stack
+          - params: "%tag%"
+          - user_entity: @user_factory
+
+      user_factory:
+        class: MockBlogBundle\Service\Model\ModelUser
+        scope: request
+        factory: ["@model_factory", createModelUser]
+        arguments:
+          - entity_manager: @doctrine.orm.entity_manager
+          - request: @request_stack
+          - params: "%user%"
+
+# ========= form ==================
+
+      form.type.category:
+        class: MockBlogBundle\Form\MockblogCategoryType
+        arguments:
+          params:
+            form_factory: @form.factory
+            router: @router
+            params: "%category%"
+        tags:
+          - { name: form.type, alias: mockblogcategory }
+
+      form.type.tag:
+        class: MockBlogBundle\Form\MockblogTagType
+        arguments:
+          params:
+            form_factory: @form.factory
+            router: @router
+            params: "%tag%"
+        tags:
+          - { name: form.type, alias: mockblogbundle_mockblogtag }
