@@ -12,7 +12,7 @@ class MockblogCategoryController extends Controller
 {
     const SERVICE_ENTITY_NAME = 'category_factory';
 
-    const SERVICE_FORM_NAME = self::SERVICE_FORM_NAME;
+    const SERVICE_FORM_NAME = 'form.type.category';
 
     private  $entityService;
 
