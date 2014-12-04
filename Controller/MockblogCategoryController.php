@@ -42,7 +42,7 @@ class MockblogCategoryController extends Controller
      */
     public function indexAction()
     {
-        $entities = $this->getEntityService()->setEntity()->getEntity()->findAll();
+        $entities = $this->getEntityService()->getRepository()->findAll();
 
         return $this->render($this->getParams('entity_alias') . ':index.html.twig', array(
             'entities' => $entities,
@@ -146,7 +146,7 @@ class MockblogCategoryController extends Controller
     public function deleteAction($id)
     {
         $form = $this->get(self::SERVICE_FORM_NAME)->deleteForm($id);
-        $this->getEntityService()->delete($form);
+        $this->getEntityService()->setEntity($id)->delete($form);
 
         return $this->redirect($this->generateUrl('mockblogcategory'));
     }

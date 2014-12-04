@@ -150,7 +150,7 @@ class MockblogTagController extends Controller
     public function deleteAction($id)
     {
         $form = $this->get(self::SERVICE_FORM_NAME)->deleteForm($id);
-        $this->getEntityService()->delete($form);
+        $this->getEntityService()->setEntity($id)->delete($form);
 
         return $this->redirect($this->generateUrl('tag'));
     }
