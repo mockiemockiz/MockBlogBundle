@@ -1,6 +1,7 @@
 {
     "name":        "mockizart-blog-bundle",
     "type":        "symfony-bundle",
+    "version":     "0.0.2",
     "description": "symfony blog bundle",
     "keywords":    ["blog", "bundle"],
     "homepage":    "https://github.com/mockiemockiz/MockBlogBundle.git",
